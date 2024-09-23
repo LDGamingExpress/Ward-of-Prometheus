@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://wdky788076t0"]
+
+[ext_resource type="Script" path="res://FoolScript.gd" id="1_aq0ac"]
+[ext_resource type="Texture2D" uid="uid://cvffqcnc6t0xw" path="res://Textures/FantasyScholarSmall.png" id="2_e0c7d"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t8dpe"]
+height = 62.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lp3i4"]
+radius = 55.0
+
+[node name="Fool" type="CharacterBody2D" groups=["Fools"]]
+script = ExtResource("1_aq0ac")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_e0c7d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_t8dpe")
+
+[node name="FireDetect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FireDetect"]
+shape = SubResource("CircleShape2D_lp3i4")
+
+[connection signal="body_entered" from="FireDetect" to="." method="_on_fire_detect_body_entered"]
