@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var FireObj = preload("res://Fire.tscn")
 
 const SPEED = 300.0
 
@@ -16,6 +17,10 @@ func _physics_process(delta: float) -> void:
 		velocity.y -= SPEED
 	if Input.is_action_pressed("Down"):
 		velocity.y += SPEED
+	if Input.is_action_pressed("FireMake"):
+		var NewFire = FireObj.instantiate()
+		NewFire.position = get_global_mouse_position()
+		get_parent().add_child(NewFire)
 
 	move_and_slide()
 	

@@ -10,6 +10,7 @@ height = 62.0
 radius = 55.0
 
 [node name="Fool" type="CharacterBody2D" groups=["Fools"]]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_aq0ac")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
