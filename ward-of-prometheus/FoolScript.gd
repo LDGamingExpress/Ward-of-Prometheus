@@ -5,6 +5,7 @@ var TestObj = preload("res://TestObject.tscn")
 const SPEED = 30.0
 var Location2Go = position
 var TimeSinceHitFire = 100
+var trapped = false
 
 func _ready() -> void:
 	Globals.FoolTotal += 1
@@ -35,8 +36,9 @@ func _physics_process(delta: float) -> void:
 
 func _on_fire_detect_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Colliders") and body != self:
-		if 10 - $Timer.time_left < 5 and TimeSinceHitFire >= 5:
+		if 10 - $Timer.time_left < 5 and trapped == false:
 			Globals.FoolsTrapped += 1
+			trapped = true
 		TimeSinceHitFire = 10 - $Timer.time_left
 		#if body.is_in_group("Fire"):
 		velocity = Vector2(0,0)
@@ -54,12 +56,32 @@ func _on_fire_detect_body_entered(body: Node2D) -> void:
 		#get_tree().paused = true
 		if body.is_in_group("Fire"):
 			$Timer.start()
+	if body.is_in_group("Ground"):
+		if 10 - $Timer.time_left < 5 and trapped == false:
+			Globals.FoolsTrapped += 1
+			trapped = true
+		TimeSinceHitFire = 10 - $Timer.time_left
+		#if body.is_in_group("Fire"):
+		velocity = Vector2(0,0)
+		Location2Go = Vector2(rng.randf_range(-(Globals.MapSize-1)/2 * 32,(Globals.MapSize-1)/2 * 32),rng.randf_range(-(Globals.MapSize-1)/2 * 32,(Globals.MapSize-1)/2 * 32))
+		#var TestO = TestObj.instantiate()
+		#TestO.position = Location2Go
+		#TestO.scale = Vector2(0.1,0.1)
+		#get_parent().add_child(TestO)
+		var MoveVector = Location2Go - position
+		var MoveVectorAbs = sqrt(pow(MoveVector.x,2) + pow(MoveVector.y,2))
+		MoveVector = Vector2(MoveVector.x/MoveVectorAbs,MoveVector.y/MoveVectorAbs)
+		velocity = MoveVector * SPEED * 10
+		move_and_slide()
+		velocity = Vector2(0,0)
+		#get_tree().paused = true
 
 
 func _on_timer_timeout() -> void:
 	#print("TimerDone")
 	#print(TimeSinceHitFire)
-	if TimeSinceHitFire < 5:
+	if trapped == true:
+		trapped = false
 		Globals.FoolsTrapped -= 1
 		#print("Freed" + str(Globals.FoolsTrapped))
 	TimeSinceHitFire = 10

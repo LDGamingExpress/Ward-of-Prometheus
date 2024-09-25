@@ -30,3 +30,5 @@ func _physics_process(delta: float) -> void:
 		velocity.y = 0
 	if velocity.x < 10:
 		velocity.x = 0
+	$Camera2D/CanvasLayer/HBoxContainer/VBoxContainer2/FoolsToTrapN.text = str(Globals.FoolTotal - Globals.FoolsTrapped)
+	$Camera2D/CanvasLayer/HBoxContainer/VBoxContainer2/FoolsTrappedN.text = str(Globals.FoolsTrapped)
