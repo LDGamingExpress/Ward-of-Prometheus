@@ -1,8 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://caxrrqj3laqyb"]
+[gd_scene load_steps=12 format=3 uid="uid://caxrrqj3laqyb"]
 
 [ext_resource type="Texture2D" uid="uid://c0dn0uk6lg73o" path="res://Textures/FireParticle.png" id="1_7dgxn"]
+[ext_resource type="Script" path="res://FireScript.gd" id="1_m5foy"]
+[ext_resource type="Texture2D" uid="uid://56ufxpfbaawk" path="res://Textures/SmokeParticle.png" id="1_vjkke"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_exskj"]
+
+[sub_resource type="Curve" id="Curve_t3hr8"]
+_data = [Vector2(0, 0), 0.0, 8.24176, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2usr4"]
+curve = SubResource("Curve_t3hr8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2seof"]
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, -1, 0)
+spread = 25.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_2usr4")
+turbulence_noise_scale = 7.263
+turbulence_noise_speed = Vector3(0, -25, 0)
 
 [sub_resource type="Curve" id="Curve_hakws"]
 _data = [Vector2(0, 0.461538), 0.0, 6.92308, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -21,12 +43,29 @@ initial_velocity_max = 50.0
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_5uaw6")
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_mtyht"]
+radius = 24.0
+
+[node name="StaticBody2D" type="StaticBody2D" groups=["Colliders", "Fire"]]
+script = ExtResource("1_m5foy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_exskj")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+amount = 9
+process_material = SubResource("ParticleProcessMaterial_2seof")
+texture = ExtResource("1_vjkke")
+lifetime = 4.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_517gc")
 texture = ExtResource("1_7dgxn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_mtyht")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

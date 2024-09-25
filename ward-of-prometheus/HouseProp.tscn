@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cspl1u476gxp4"]
+
+[ext_resource type="Script" path="res://HouseScript.gd" id="1_41q5v"]
+[ext_resource type="Texture2D" uid="uid://q02yr7jm21h6" path="res://Textures/SpriteSheet.png" id="1_hmgql"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7nmq"]
+atlas = ExtResource("1_hmgql")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hmvwn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7nmq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxlem"]
+size = Vector2(30, 30)
+
+[node name="StaticBody2D" type="StaticBody2D" groups=["Colliders", "Flamable"]]
+script = ExtResource("1_41q5v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_hmvwn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hxlem")

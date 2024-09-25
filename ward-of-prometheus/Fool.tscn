@@ -6,10 +6,11 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t8dpe"]
 height = 62.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lp3i4"]
-radius = 55.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_38bm7"]
+radius = 22.0
+height = 84.0
 
-[node name="Fool" type="CharacterBody2D" groups=["Fools"]]
+[node name="Fool" type="CharacterBody2D" groups=["Colliders", "Fools"]]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_aq0ac")
 
@@ -22,6 +23,10 @@ shape = SubResource("CapsuleShape2D_t8dpe")
 [node name="FireDetect" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FireDetect"]
-shape = SubResource("CircleShape2D_lp3i4")
+shape = SubResource("CapsuleShape2D_38bm7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
 
 [connection signal="body_entered" from="FireDetect" to="." method="_on_fire_detect_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

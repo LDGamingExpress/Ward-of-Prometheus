@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cr68p6mq6i0qt"]
+
+[ext_resource type="Texture2D" uid="uid://q02yr7jm21h6" path="res://Textures/SpriteSheet.png" id="1_68uno"]
+[ext_resource type="Script" path="res://TreeScript.gd" id="1_v77g4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcpro"]
+atlas = ExtResource("1_68uno")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t44il"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcpro")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfbs3"]
+size = Vector2(18, 26)
+
+[node name="StaticBody2D" type="StaticBody2D" groups=["Colliders", "Flamable"]]
+script = ExtResource("1_v77g4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_t44il")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lfbs3")
