@@ -35,15 +35,18 @@ horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Start"
 script = ExtResource("2_sq0fj")
 
 [node name="LoadButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Load"
 
 [node name="ExitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Exit"
 script = ExtResource("3_h250o")
 
