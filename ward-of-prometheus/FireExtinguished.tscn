@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0c4f8i343x07"]
+
+[ext_resource type="Texture2D" uid="uid://blt88f8hk5cmf" path="res://Textures/FireExtinguishParticles.png" id="1_3d6lv"]
+[ext_resource type="Script" path="res://fire_extinguishedScript.gd" id="2_kci7g"]
+
+[sub_resource type="Curve" id="Curve_jhtce"]
+_data = [Vector2(0, 0), 0.0, 3.40659, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1kq7o"]
+curve = SubResource("Curve_jhtce")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wvvfm"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 40, 0)
+scale_curve = SubResource("CurveTexture_1kq7o")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_wvvfm")
+texture = ExtResource("1_3d6lv")
+one_shot = true
+explosiveness = 0.97
+script = ExtResource("2_kci7g")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

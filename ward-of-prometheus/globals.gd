@@ -3,7 +3,7 @@ var MapSize = 50
 var FoolTotal = 0
 var FoolsTrapped = 0
 var FoolsNeeded = 25
-
+var HeroesNeeded = 5
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

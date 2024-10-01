@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ch67qi4go867p"]
+
+[ext_resource type="Script" path="res://HeroScript.gd" id="1_w2w0m"]
+[ext_resource type="Texture2D" uid="uid://bmhls2gt1aax3" path="res://Textures/Greek_Roman_Soldier(Small).png" id="2_07lpd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nya0s"]
+height = 62.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hva5s"]
+radius = 100.0
+height = 250.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nw3c4"]
+radius = 30.0
+height = 60.0
+
+[node name="Hero" type="CharacterBody2D"]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_w2w0m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_07lpd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_nya0s")
+
+[node name="FireDetect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FireDetect"]
+shape = SubResource("CapsuleShape2D_hva5s")
+
+[node name="FirePutOutDetect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FirePutOutDetect"]
+shape = SubResource("CapsuleShape2D_nw3c4")
+
+[connection signal="body_entered" from="FireDetect" to="." method="_on_fire_detect_body_entered"]
+[connection signal="body_entered" from="FirePutOutDetect" to="." method="_on_fire_put_out_detect_body_entered"]

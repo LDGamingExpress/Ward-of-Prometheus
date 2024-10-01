@@ -2,6 +2,7 @@ extends Node2D
 var Tiles = []
 var rng = RandomNumberGenerator.new()
 var FoolObj = preload("res://Fool.tscn")
+var HeroObj = preload("res://Hero.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -56,6 +57,12 @@ func _ready() -> void:
 		var NewFool = FoolObj.instantiate()
 		NewFool.position = Vector2((Tiles2SpawnOn[Tile2SpawnIn][0] - 1) * 32 + 16 - (Globals.MapSize/2*32),(Tiles2SpawnOn[Tile2SpawnIn][1] - 1) * 32 + 16 - (Globals.MapSize/2*32))
 		add_child(NewFool)
+		Tiles2SpawnOn.remove_at(Tile2SpawnIn)
+	for n in range(0,Globals.HeroesNeeded):
+		var Tile2SpawnIn = rng.randi_range(0,len(Tiles2SpawnOn)-1)
+		var NewHero = HeroObj.instantiate()
+		NewHero.position = Vector2((Tiles2SpawnOn[Tile2SpawnIn][0] - 1) * 32 + 16 - (Globals.MapSize/2*32),(Tiles2SpawnOn[Tile2SpawnIn][1] - 1) * 32 + 16 - (Globals.MapSize/2*32))
+		add_child(NewHero)
 		Tiles2SpawnOn.remove_at(Tile2SpawnIn)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
