@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://by3ab5upwboo0"]
+
+[ext_resource type="Texture2D" uid="uid://ck3cg1llpi5oy" path="res://Textures/WardOfPrometheusSlide2.png" id="1_d336s"]
+[ext_resource type="Script" path="res://CutsceneBackground.gd" id="2_ylw0h"]
+[ext_resource type="AudioStream" uid="uid://f5073hvu7c5p" path="res://SFX/Ward of Prometheis - Menu.wav" id="3_tbluc"]
+[ext_resource type="Script" path="res://music_playerScript(Menu).gd" id="4_qctyt"]
+[ext_resource type="FontFile" uid="uid://bu4ys7121tewh" path="res://Textures/Kenney Mini.ttf" id="5_w4et8"]
+[ext_resource type="Script" path="res://BackButtonScript.gd" id="6_j4ile"]
+
+[sub_resource type="Theme" id="Theme_nhk15"]
+default_font = ExtResource("5_w4et8")
+default_font_size = 32
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -54.0
+offset_right = 96.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_d336s")
+script = ExtResource("2_ylw0h")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tbluc")
+autoplay = true
+script = ExtResource("4_qctyt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -196.0
+offset_right = 336.0
+grow_vertical = 0
+theme = SubResource("Theme_nhk15")
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Credits:
+Coding - Luka
+Character Art - Kaylee
+Music - Duncan"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Back
+"
+script = ExtResource("6_j4ile")
+
+[connection signal="finished" from="MusicPlayer" to="MusicPlayer" method="_on_finished"]
+[connection signal="pressed" from="VBoxContainer/BackButton" to="VBoxContainer/BackButton" method="_on_pressed"]

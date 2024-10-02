@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://coj5guwxj0ib0"]
+[gd_scene load_steps=12 format=3 uid="uid://coj5guwxj0ib0"]
 
 [ext_resource type="Script" path="res://PlayerScript.gd" id="1_avo2v"]
 [ext_resource type="Theme" uid="uid://buribugauqwsd" path="res://Textures/MainTheme.tres" id="2_x0cwt"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://MainMenuButton.gd" id="6_dxhbo"]
 [ext_resource type="Script" path="res://exit_buttonScript.gd" id="7_ow73u"]
 [ext_resource type="Script" path="res://MainMenuButtonScript.gd" id="9_rjge6"]
+[ext_resource type="Script" path="res://HelpButtonScript.gd" id="10_x6uaw"]
+[ext_resource type="Texture2D" uid="uid://dmypeqgsgkoug" path="res://Textures/TempleImage.png" id="11_n3dkv"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_avo2v")
@@ -140,8 +142,59 @@ mouse_default_cursor_shape = 2
 text = "Exit Game"
 script = ExtResource("7_ow73u")
 
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("2_x0cwt")
+
+[node name="HelpButton" type="Button" parent="Camera2D/CanvasLayer/VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Show Help"
+script = ExtResource("10_x6uaw")
+
+[node name="Label" type="Label" parent="Camera2D/CanvasLayer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Left Click to
+place flames.
+
+Surround
+the \"fools\"
+with the flames
+to trap them.
+ "
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D/CanvasLayer/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("11_n3dkv")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="Camera2D/CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Hover mouse
+over temples
+for mana."
+
 [connection signal="pressed" from="Camera2D/CanvasLayer/HBoxContainer/VBoxContainer3/PauseButton" to="Camera2D/CanvasLayer/HBoxContainer/VBoxContainer3/PauseButton" method="_on_pressed"]
 [connection signal="pressed" from="Camera2D/CanvasLayer/HBoxContainer/VBoxContainer3/MainMenuButton" to="Camera2D/CanvasLayer/HBoxContainer/VBoxContainer3/MainMenuButton" method="_on_pressed"]
 [connection signal="pressed" from="Camera2D/CanvasLayer/HBoxContainer/VBoxContainer3/ExitButton" to="Camera2D/CanvasLayer/HBoxContainer/VBoxContainer3/ExitButton" method="_on_pressed"]
 [connection signal="pressed" from="Camera2D/CanvasLayer/GameoverContainer/MainMenuButton" to="Camera2D/CanvasLayer/GameoverContainer/MainMenuButton" method="_on_pressed"]
 [connection signal="pressed" from="Camera2D/CanvasLayer/GameoverContainer/ExitButton" to="Camera2D/CanvasLayer/GameoverContainer/ExitButton" method="_on_pressed"]
+[connection signal="pressed" from="Camera2D/CanvasLayer/VBoxContainer/HelpButton" to="Camera2D/CanvasLayer/VBoxContainer/HelpButton" method="_on_pressed"]
