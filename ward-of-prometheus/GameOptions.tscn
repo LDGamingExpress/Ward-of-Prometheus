@@ -1,0 +1,124 @@
+[gd_scene load_steps=11 format=3 uid="uid://bjindjvt1uku0"]
+
+[ext_resource type="AudioStream" uid="uid://f5073hvu7c5p" path="res://SFX/Ward of Prometheis - Menu.wav" id="1_810aw"]
+[ext_resource type="Script" path="res://music_playerScript(Menu).gd" id="2_wj5n4"]
+[ext_resource type="FontFile" uid="uid://bu4ys7121tewh" path="res://Textures/Kenney Mini.ttf" id="3_ljo4k"]
+[ext_resource type="Script" path="res://PlayButton.gd" id="4_c3d82"]
+[ext_resource type="Script" path="res://SizeChangerScript.gd" id="5_e1ffh"]
+[ext_resource type="Script" path="res://FoolChangerScript.gd" id="6_0hyq1"]
+[ext_resource type="Script" path="res://HeroChangerScript.gd" id="7_iyb5y"]
+[ext_resource type="Script" path="res://ManaChangerScript.gd" id="8_05862"]
+[ext_resource type="Script" path="res://BackButtonScript.gd" id="8_shvic"]
+
+[sub_resource type="Theme" id="Theme_724c8"]
+default_font = ExtResource("3_ljo4k")
+default_font_size = 32
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_810aw")
+autoplay = true
+script = ExtResource("2_wj5n4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -196.0
+offset_right = 336.0
+grow_vertical = 0
+theme = SubResource("Theme_724c8")
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Game Options"
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Play New Game"
+script = ExtResource("4_c3d82")
+
+[node name="SizeChanger" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("5_e1ffh")
+
+[node name="SizeLabel" type="Label" parent="VBoxContainer/SizeChanger"]
+layout_mode = 2
+text = "World Size:"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/SizeChanger"]
+layout_mode = 2
+min_value = 1.0
+max_value = 70.0
+value = 1.0
+
+[node name="FoolChanger" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("6_0hyq1")
+
+[node name="FoolLabel" type="Label" parent="VBoxContainer/FoolChanger"]
+layout_mode = 2
+text = "Number Of Fools:"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/FoolChanger"]
+layout_mode = 2
+min_value = 1.0
+max_value = 70.0
+value = 1.0
+
+[node name="HeroChanger" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("7_iyb5y")
+
+[node name="HeroLabel" type="Label" parent="VBoxContainer/HeroChanger"]
+layout_mode = 2
+text = "Number Of Heroes:"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/HeroChanger"]
+layout_mode = 2
+min_value = 1.0
+max_value = 70.0
+value = 1.0
+
+[node name="ManaChanger" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("8_05862")
+
+[node name="ManaLabel" type="Label" parent="VBoxContainer/ManaChanger"]
+layout_mode = 2
+text = "Max Mana:"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/ManaChanger"]
+layout_mode = 2
+min_value = 1.0
+max_value = 200.0
+value = 1.0
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Back
+"
+script = ExtResource("8_shvic")
+
+[connection signal="finished" from="MusicPlayer" to="MusicPlayer" method="_on_finished"]
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="VBoxContainer/PlayButton" method="_on_pressed"]
+[connection signal="value_changed" from="VBoxContainer/SizeChanger/HSlider" to="VBoxContainer/SizeChanger" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/FoolChanger/HSlider" to="VBoxContainer/FoolChanger" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HeroChanger/HSlider" to="VBoxContainer/HeroChanger" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/ManaChanger/HSlider" to="VBoxContainer/ManaChanger" method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/BackButton" to="VBoxContainer/BackButton" method="_on_pressed"]

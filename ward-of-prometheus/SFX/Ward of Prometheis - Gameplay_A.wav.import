@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bx41nwx03dv3"
+path="res://.godot/imported/Ward of Prometheis - Gameplay_A.wav-6e4ad333fcde9ce2f35f8e92e5645899.sample"
+
+[deps]
+
+source_file="res://SFX/Ward of Prometheis - Gameplay_A.wav"
+dest_files=["res://.godot/imported/Ward of Prometheis - Gameplay_A.wav-6e4ad333fcde9ce2f35f8e92e5645899.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -35,4 +35,5 @@ shape = SubResource("CapsuleShape2D_hva5s")
 shape = SubResource("CapsuleShape2D_nw3c4")
 
 [connection signal="body_entered" from="FireDetect" to="." method="_on_fire_detect_body_entered"]
+[connection signal="body_exited" from="FireDetect" to="." method="_on_fire_detect_body_exited"]
 [connection signal="body_entered" from="FirePutOutDetect" to="." method="_on_fire_put_out_detect_body_entered"]

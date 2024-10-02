@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://8puhwu1pgixd"]
+[gd_scene load_steps=13 format=3 uid="uid://8puhwu1pgixd"]
 
 [ext_resource type="Script" path="res://MainGameScript.gd" id="1_4v6dp"]
 [ext_resource type="Texture2D" uid="uid://q02yr7jm21h6" path="res://Textures/SpriteSheet.png" id="1_nns6q"]
 [ext_resource type="PackedScene" uid="uid://cspl1u476gxp4" path="res://HouseProp.tscn" id="2_ayww3"]
 [ext_resource type="PackedScene" uid="uid://coj5guwxj0ib0" path="res://Player.tscn" id="2_lea6x"]
 [ext_resource type="PackedScene" uid="uid://cr68p6mq6i0qt" path="res://TreeProp.tscn" id="3_ath4o"]
+[ext_resource type="Script" path="res://MusicPlayer(Game).gd" id="6_1qdmx"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g0m6q"]
 
@@ -243,3 +244,9 @@ tile_set = SubResource("TileSet_dvi7h")
 tile_set = SubResource("TileSet_niltu")
 
 [node name="Player" parent="." instance=ExtResource("2_lea6x")]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+script = ExtResource("6_1qdmx")
+
+[connection signal="finished" from="MusicPlayer" to="MusicPlayer" method="_on_finished"]

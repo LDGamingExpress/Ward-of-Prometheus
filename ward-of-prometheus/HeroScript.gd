@@ -7,9 +7,10 @@ const SPEED = 30.0
 var Location2Go = position
 var TimeSinceHitFire = 100
 var trapped = false
+var FiresFound = []
 
 func _ready() -> void:
-	Globals.FoolTotal += 1
+	#Globals.FoolTotal += 1
 	Location2Go = Vector2(rng.randf_range((Globals.MapSize - 1) * -16, (Globals.MapSize - 1) * 16),rng.randf_range((Globals.MapSize - 1) * -16, (Globals.MapSize - 1) * 16))
 	var Sprite2Use = rng.randi_range(1,3)
 	match Sprite2Use:
@@ -39,6 +40,7 @@ func _on_fire_detect_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Colliders") and body != self:
 		if body.is_in_group("Fire"):
 			Location2Go = body.position
+			FiresFound.append(body)
 
 
 func _on_fire_put_out_detect_body_entered(body: Node2D) -> void:
@@ -48,7 +50,11 @@ func _on_fire_put_out_detect_body_entered(body: Node2D) -> void:
 		NewObj.restart()
 		get_parent().add_child(NewObj)
 		if body.position == Location2Go:
-			Location2Go = Vector2(rng.randf_range((Globals.MapSize - 1) * -16, (Globals.MapSize - 1) * 16),rng.randf_range((Globals.MapSize - 1) * -16, (Globals.MapSize - 1) * 16))
+			FiresFound.erase(body)
+			if len(FiresFound) > 0:
+				Location2Go = FiresFound[rng.randi_range(0,len(FiresFound) - 1)].position
+			else:
+				Location2Go = Vector2(rng.randf_range((Globals.MapSize - 1) * -16, (Globals.MapSize - 1) * 16),rng.randf_range((Globals.MapSize - 1) * -16, (Globals.MapSize - 1) * 16))
 		body.queue_free()
 	if body.is_in_group("Ground"):
 		velocity = Vector2(0,0)
@@ -64,3 +70,9 @@ func _on_fire_put_out_detect_body_entered(body: Node2D) -> void:
 		move_and_slide()
 		velocity = Vector2(0,0)
 		#get_tree().paused = true
+
+
+func _on_fire_detect_body_exited(body: Node2D) -> void:
+	if body.is_in_group("Colliders") and body != self:
+		if body.is_in_group("Fire"):
+			FiresFound.erase(body)

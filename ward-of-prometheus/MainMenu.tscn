@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfsa56mqe7a3e"]
+[gd_scene load_steps=7 format=3 uid="uid://cfsa56mqe7a3e"]
 
 [ext_resource type="FontFile" uid="uid://bu4ys7121tewh" path="res://Textures/Kenney Mini.ttf" id="1_2wgft"]
 [ext_resource type="Script" path="res://start_buttonScript.gd" id="2_sq0fj"]
 [ext_resource type="Script" path="res://exit_buttonScript.gd" id="3_h250o"]
+[ext_resource type="AudioStream" uid="uid://f5073hvu7c5p" path="res://SFX/Ward of Prometheis - Menu.wav" id="4_idga0"]
+[ext_resource type="Script" path="res://music_playerScript(Menu).gd" id="5_fp3eg"]
 
 [sub_resource type="Theme" id="Theme_y016r"]
 default_font = ExtResource("1_2wgft")
@@ -39,10 +41,10 @@ mouse_default_cursor_shape = 2
 text = "Start"
 script = ExtResource("2_sq0fj")
 
-[node name="LoadButton" type="Button" parent="VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "Load"
+text = "Credits"
 
 [node name="ExitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -50,5 +52,11 @@ mouse_default_cursor_shape = 2
 text = "Exit"
 script = ExtResource("3_h250o")
 
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_idga0")
+autoplay = true
+script = ExtResource("5_fp3eg")
+
 [connection signal="pressed" from="VBoxContainer/StartButton" to="VBoxContainer/StartButton" method="_on_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="VBoxContainer/ExitButton" method="_on_pressed"]
+[connection signal="finished" from="MusicPlayer" to="MusicPlayer" method="_on_finished"]

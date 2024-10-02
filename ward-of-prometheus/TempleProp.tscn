@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://ta8tvxkme4gv"]
+
+[ext_resource type="Texture2D" uid="uid://q02yr7jm21h6" path="res://Textures/SpriteSheet.png" id="1_f8aqq"]
+[ext_resource type="Script" path="res://TemplePropScript.gd" id="1_vxs8c"]
+[ext_resource type="Texture2D" uid="uid://cikhovqym21o8" path="res://Textures/TempleParticle.png" id="2_ho5nr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1dap"]
+atlas = ExtResource("1_f8aqq")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_72epv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1dap")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4x2wh"]
+size = Vector2(30, 28)
+
+[sub_resource type="Curve" id="Curve_ulm65"]
+_data = [Vector2(0, 0), 0.0, 4.75113, 0, 0, Vector2(0.666667, 0.78022), -3.53218, -3.53218, 0, 0, Vector2(1, 0), -4.54718, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_oqcrl"]
+curve = SubResource("Curve_ulm65")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_smpb1"]
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, -1, 0)
+spread = 20.0
+initial_velocity_min = 10.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_oqcrl")
+
+[node name="StaticBody2D" type="StaticBody2D" groups=["Colliders"]]
+script = ExtResource("1_vxs8c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_72epv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4x2wh")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_smpb1")
+texture = ExtResource("2_ho5nr")

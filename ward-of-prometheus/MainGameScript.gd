@@ -3,9 +3,11 @@ var Tiles = []
 var rng = RandomNumberGenerator.new()
 var FoolObj = preload("res://Fool.tscn")
 var HeroObj = preload("res://Hero.tscn")
+var TempleObj = preload("res://TempleProp.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Globals.Mana = Globals.ManaMax
 	var Tiles2SpawnOn = []
 	for VTiles in range(0,Globals.MapSize):
 		var TempMat = []
@@ -64,6 +66,15 @@ func _ready() -> void:
 		NewHero.position = Vector2((Tiles2SpawnOn[Tile2SpawnIn][0] - 1) * 32 + 16 - (Globals.MapSize/2*32),(Tiles2SpawnOn[Tile2SpawnIn][1] - 1) * 32 + 16 - (Globals.MapSize/2*32))
 		add_child(NewHero)
 		Tiles2SpawnOn.remove_at(Tile2SpawnIn)
+	var Tile2SpawnIn = rng.randi_range(0,len(Tiles2SpawnOn)-1)
+	var NewTemple = TempleObj.instantiate()
+	NewTemple.position = Vector2((Tiles2SpawnOn[Tile2SpawnIn][0] - 1) * 32 + 16 - (Globals.MapSize/2*32),(Tiles2SpawnOn[Tile2SpawnIn][1] - 1) * 32 + 16 - (Globals.MapSize/2*32))
+	add_child(NewTemple)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Globals.FoolsTrapped == Globals.FoolsNeeded:
+		$MusicPlayer.stream = load("res://SFX/Ward of Prometheis - GameOver.wav")
+		$MusicPlayer.play()
+		$Player/Camera2D/CanvasLayer/GameoverContainer.visible = true
+		$Player/Camera2D/CanvasLayer/GameoverContainer/Label.text = "Game Over!\nYou Trapped\n" + str(Globals.FoolTotal) + " Fools\nin the Name of\nPrometheus"
+		get_tree().paused = true

@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4hfsx8hepdof"]
+
+[ext_resource type="Texture2D" uid="uid://cikhovqym21o8" path="res://Textures/TempleParticle.png" id="1_ndgk8"]
+[ext_resource type="Script" path="res://fire_extinguishedScript.gd" id="2_aq4kt"]
+
+[sub_resource type="Curve" id="Curve_6bjg4"]
+_data = [Vector2(0, 0), 0.0, 8.85989, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_oggx7"]
+curve = SubResource("Curve_6bjg4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qyw72"]
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 1, 0)
+scale_curve = SubResource("CurveTexture_oggx7")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_qyw72")
+texture = ExtResource("1_ndgk8")
+one_shot = true
+explosiveness = 0.95
+script = ExtResource("2_aq4kt")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
