@@ -17,6 +17,10 @@ func _physics_process(delta: float) -> void:
 		velocity.y -= SPEED
 	if Input.is_action_pressed("Down"):
 		velocity.y += SPEED
+	if Input.is_action_just_released("ZoomIn"): # Checks if player is trying to zoom in
+		$Camera2D.zoom += Vector2(0.05,0.05) # Zooms in the camera
+	if Input.is_action_just_released("ZoomOut"): # Checks if player is trying to zoom out
+		$Camera2D.zoom -= Vector2(0.05,0.05) # Zooms out the camera
 	if Input.is_action_pressed("FireMake") and Globals.Mana >= 1 and sqrt(pow(LastFirePos.x - get_global_mouse_position().x,2) + pow(LastFirePos.y - get_global_mouse_position().y,2)) > 10:
 		LastFirePos = get_global_mouse_position()
 		Globals.Mana -= 1

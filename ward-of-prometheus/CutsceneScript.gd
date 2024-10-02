@@ -12,7 +12,7 @@ set out to take his revenge
 using the very gift he gave to
 them."
 	await get_tree().create_timer(15).timeout
-	$TextureRect.texture = load("res://Textures/WardOfPrometheusSlide3.png")
+	$TextureRect.texture = load("res://Textures/WardOfPrometheusSlide3V2.png")
 	$Label.text = "Fueled by the power of belief from
 the few temples that honored him,
 he would trap the Fools who had

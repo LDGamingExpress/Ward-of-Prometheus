@@ -79,7 +79,6 @@ horizontal_alignment = 1
 [node name="HSlider" type="HSlider" parent="VBoxContainer/SizeChanger"]
 layout_mode = 2
 min_value = 1.0
-max_value = 70.0
 value = 1.0
 
 [node name="FoolChanger" type="VBoxContainer" parent="VBoxContainer"]
