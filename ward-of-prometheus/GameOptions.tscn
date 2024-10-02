@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bjindjvt1uku0"]
+[gd_scene load_steps=13 format=3 uid="uid://bjindjvt1uku0"]
 
 [ext_resource type="AudioStream" uid="uid://f5073hvu7c5p" path="res://SFX/Ward of Prometheis - Menu.wav" id="1_810aw"]
+[ext_resource type="Texture2D" uid="uid://wf57c0dalnuc" path="res://Textures/WardOfPrometheusSlide1.png" id="1_jd41q"]
 [ext_resource type="Script" path="res://music_playerScript(Menu).gd" id="2_wj5n4"]
+[ext_resource type="Script" path="res://CutsceneBackground.gd" id="2_xpr0d"]
 [ext_resource type="FontFile" uid="uid://bu4ys7121tewh" path="res://Textures/Kenney Mini.ttf" id="3_ljo4k"]
 [ext_resource type="Script" path="res://PlayButton.gd" id="4_c3d82"]
 [ext_resource type="Script" path="res://SizeChangerScript.gd" id="5_e1ffh"]
@@ -21,6 +23,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -54.0
+offset_right = 96.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_jd41q")
+script = ExtResource("2_xpr0d")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_810aw")

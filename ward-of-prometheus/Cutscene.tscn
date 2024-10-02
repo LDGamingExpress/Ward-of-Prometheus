@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmqfuif2g8yll"]
+
+[ext_resource type="Script" path="res://CutsceneScript.gd" id="1_c1jc4"]
+[ext_resource type="Texture2D" uid="uid://wf57c0dalnuc" path="res://Textures/WardOfPrometheusSlide1.png" id="1_net0c"]
+[ext_resource type="Script" path="res://CutsceneBackground.gd" id="2_vl70l"]
+[ext_resource type="Theme" uid="uid://buribugauqwsd" path="res://Textures/MainTheme.tres" id="3_rnvf5"]
+[ext_resource type="Script" path="res://CutsceneButtonScript.gd" id="4_asdb2"]
+[ext_resource type="AudioStream" uid="uid://f5073hvu7c5p" path="res://SFX/Ward of Prometheis - Menu.wav" id="5_s08iv"]
+[ext_resource type="Script" path="res://music_playerScript(Menu).gd" id="6_8vu67"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c1jc4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_net0c")
+script = ExtResource("2_vl70l")
+
+[node name="CutsceneButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_rnvf5")
+text = "Skip Cutscene"
+script = ExtResource("4_asdb2")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme = ExtResource("3_rnvf5")
+text = "For bringing fire to man, Prometheus
+was chained for perpetuity.
+
+He waited countless years for those 
+he aided to save him from his fate,
+but none came..."
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_s08iv")
+autoplay = true
+script = ExtResource("6_8vu67")
+
+[connection signal="pressed" from="CutsceneButton" to="CutsceneButton" method="_on_pressed"]
+[connection signal="finished" from="MusicPlayer" to="MusicPlayer" method="_on_finished"]
